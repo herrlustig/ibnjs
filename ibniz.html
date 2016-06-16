@@ -800,9 +800,9 @@ function Parser(simpleGetPut,useAudio)
 			this.buffer = new Float32Array(512);
 		}
 	}
-	if(typeof webkitAudioContext !== 'undefined')
+	if(typeof AudioContext !== 'undefined')
 	{
-		this.audioCtx = new webkitAudioContext();
+		this.audioCtx = new AudioContext();
 		this.audioSR = this.audioCtx.sampleRate/60;
 		this.useChromeAudio = true;
 		this.buffer = new Float32Array(512);
@@ -877,8 +877,8 @@ function Parser(simpleGetPut,useAudio)
 			this.audioOut = this.audioCtx.createBufferSource();
 			this.audioOut.buffer=this.aBuffer;
 			this.audioOut.connect(this.audioCtx.destination);
-			this.audioOut.noteOn(0);
-			this.audioOut.loop = true;
+			this.audioOut.start(0);
+			this.audioOut.looping = true;
 		}
 	}
 	this.delayAudio = function(a)
